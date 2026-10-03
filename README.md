@@ -20,6 +20,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Google sign-in
+
+Sign-in accepts any Google account with a verified email address. In Google Cloud Console, set the OAuth consent screen audience to **External** to allow accounts outside an organization, then configure an OAuth client for a web application and set its authorized redirect URI to:
+
+```text
+http://localhost:3000/api/auth/callback/google
+```
+
+Copy `.env.example` to `.env.local` and set the Google OAuth client ID, client secret, and a unique `NEXTAUTH_SECRET`. Keep these values private. Add the matching callback URI for the deployed site in the Google Cloud OAuth client. While the OAuth consent screen is in testing mode, only accounts listed as test users can sign in; publish the app to allow other Google accounts. The app verifies Google's email claim on the server. This accepts personal Google accounts, but does not provide sign-in through Microsoft or other non-Google identity providers.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

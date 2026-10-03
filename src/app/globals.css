@@ -212,7 +212,7 @@ body {
   }
 }
 
-/* Static login page */
+/* Login page */
 body:has(.loginPage) .siteHeader {
   display: none;
 }
@@ -264,8 +264,7 @@ body:has(.loginPage) .siteHeader {
   line-height: 1.6;
 }
 
-.loginMicrosoftButton {
-  display: block;
+.loginProviderButton {
   width: 100%;
   min-height: 3.5rem;
   margin-top: 3.5rem;
@@ -280,13 +279,20 @@ body:has(.loginPage) .siteHeader {
   cursor: pointer;
 }
 
-.loginMicrosoftButton:hover {
+.loginProviderButton:hover {
   background: #285338;
 }
 
-.loginMicrosoftButton:focus-visible {
+.loginProviderButton:focus-visible {
   outline: 2px solid #285338;
   outline-offset: 3px;
+}
+
+.loginError {
+  margin: 0 0 1rem;
+  color: #a32020;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 @media (max-width: 480px) {
