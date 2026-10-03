@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { ProductCatalogProvider } from "@/context/ProductCatalogContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,10 +23,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="th">
       <body>
-        <header className="siteHeader">
-          <Navbar />
-        </header>
-        {children}
+        <ProductCatalogProvider>
+          <header className="siteHeader">
+            <Navbar />
+          </header>
+          {children}
+        </ProductCatalogProvider>
       </body>
     </html>
   );
