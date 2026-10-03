@@ -1,14 +1,15 @@
-import ProductCard from "@/components/Product/ProductCard";
-import { infoproduct } from "@/Data/infoproduct";
+import type { Metadata } from "next";
+import SearchExprolrer from "@/components/search/searchExprolrer";
+
+export const metadata: Metadata = {
+  title: "สินค้าทั้งหมด",
+};
+
 
 export default function Store() {
   return (
     <main className="shopPage">
-      <section className="productGrid" aria-label="รายการสินค้า">
-        {infoproduct.map((product, index) => (
-          <ProductCard key={`${product.Name}-${index}`} product={product} />
-        ))}
-      </section>
+      <SearchExprolrer />
     </main>
   );
 }

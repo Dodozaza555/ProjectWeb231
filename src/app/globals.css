@@ -31,6 +31,40 @@ body {
   margin-inline: auto;
 }
 
+.searchControls {
+  display: flex;
+  gap: 0.6rem;
+  margin-block: 0.75rem;
+}
+
+.searchInput,
+.categoryFilter {
+  box-sizing: border-box;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #888;
+  border-radius: 0;
+  background: #fff;
+  color: #171717;
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+}
+
+.categoryFilter {
+  min-width: 10rem;
+}
+
+.searchInput:focus-visible,
+.categoryFilter:focus-visible {
+  outline: 2px solid #285338;
+  outline-offset: 2px;
+}
+
 .shopPage {
   width: min(100% - 2rem, 70rem);
   margin-inline: auto;
@@ -52,6 +86,23 @@ body {
   background: #fff;
   color: #171717;
   transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.productCardTrigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.productCardTrigger:focus-visible {
+  outline: 2px solid #285338;
+  outline-offset: 2px;
 }
 
 .productCard:hover {
@@ -90,17 +141,20 @@ body {
 }
 
 .productInfo {
+  display: block;
   min-height: 4.25rem;
   padding: 0.4rem 0.5rem;
 }
 
 .productPrice {
+  display: block;
   margin: 0 0 0.2rem;
   font-size: 0.9rem;
   font-weight: 700;
 }
 
 .productTitle {
+  display: block;
   overflow: hidden;
   margin: 0 0 0.15rem;
   font-size: 0.7rem;
@@ -110,12 +164,98 @@ body {
 }
 
 .productMeta {
+  display: block;
   overflow: hidden;
   margin: 0;
   color: #555;
   font-size: 0.6rem;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Product details dialog */
+.productDialogBackdrop {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(0 0 0 / 45%);
+}
+
+.productDialog {
+  box-sizing: border-box;
+  width: min(100%, 34rem);
+  max-height: min(88svh, 46rem);
+  overflow-y: auto;
+  padding: 1.25rem;
+  border: 1px solid #b8b8b8;
+  background: #fff;
+  color: #171717;
+}
+
+.productDialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.productDialogHeader h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.productDialogClose {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: transparent;
+  color: #171717;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.productDialogMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #f4f4f4;
+}
+
+.productDialogMedia img {
+  object-fit: contain;
+}
+
+.productDialogPlaceholder {
+  display: grid;
+  place-items: center;
+  color: #555;
+}
+
+.productDialogName {
+  margin: 1rem 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.productDialogPrice {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.productDialogCategory {
+  margin: 0.45rem 0;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.productDialogDescription {
+  margin: 0.75rem 0 0;
+  line-height: 1.6;
 }
 
 /* Navbar */
@@ -177,6 +317,242 @@ body {
   outline-offset: 2px;
 }
 
+/* Sell product dialog */
+.sellDialogBackdrop {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(0 0 0 / 45%);
+}
+
+.sellDialog {
+  box-sizing: border-box;
+  width: min(100%, 34rem);
+  max-height: min(88svh, 46rem);
+  overflow-y: auto;
+  padding: 1.25rem;
+  border: 1px solid #b8b8b8;
+  background: #fff;
+  color: #171717;
+}
+
+.sellDialogHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sellDialogHeader h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.sellDialogClose {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: transparent;
+  color: #171717;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sellForm {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.sellForm label {
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.sellForm input,
+.sellForm select,
+.sellForm textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.65rem;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid #aaa;
+  border-radius: 0;
+  background: #fff;
+  color: #171717;
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.sellForm textarea {
+  resize: vertical;
+}
+
+.sellFormError {
+  margin: 0.25rem 0 0;
+  color: #a11b1b;
+  font-size: 0.8rem;
+}
+
+.sellForm input[type="file"] {
+  padding: 0.45rem;
+}
+
+.sellForm input:focus-visible,
+.sellForm select:focus-visible,
+.sellForm textarea:focus-visible,
+.sellDialogClose:focus-visible {
+  outline: 2px solid #285338;
+  outline-offset: 2px;
+}
+
+.sellFormSubmit {
+  min-height: 2.65rem;
+  justify-self: end;
+  margin-top: 0.65rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sellFormSubmit:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+/* My posts dialog */
+.myPostsBackdrop {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(0 0 0 / 45%);
+}
+
+.myPostsDialog {
+  box-sizing: border-box;
+  width: min(100%, 36rem);
+  max-height: min(88svh, 46rem);
+  overflow-y: auto;
+  padding: 1.25rem;
+  border: 1px solid #b8b8b8;
+  background: #fff;
+  color: #171717;
+}
+
+.myPostsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.myPostsHeader h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.myPostsClose {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: transparent;
+  color: #171717;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.myPostsSearch {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid #999;
+  border-radius: 0;
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.myPostsEmpty {
+  margin: 1.5rem 0;
+  color: #555;
+  text-align: center;
+}
+
+.myPostsList {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.myPostItem {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.65rem 0;
+  border-top: 1px solid #ddd;
+}
+
+.myPostImage {
+  position: relative;
+  flex: 0 0 5rem;
+  width: 5rem;
+  aspect-ratio: 1;
+  background: #f3f3f3;
+}
+
+.myPostImage img {
+  object-fit: cover;
+}
+
+.myPostImagePlaceholder {
+  display: grid;
+  place-items: center;
+  color: #555;
+  font-size: 0.7rem;
+}
+
+.myPostInfo {
+  min-width: 0;
+}
+
+.myPostInfo h3,
+.myPostInfo p {
+  margin: 0 0 0.25rem;
+}
+
+.myPostInfo h3 {
+  font-size: 0.9rem;
+}
+
+.myPostInfo p {
+  color: #555;
+  font-size: 0.8rem;
+}
+
+.myPostInfo strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.myPostsClose:focus-visible,
+.myPostsSearch:focus-visible {
+  outline: 2px solid #285338;
+  outline-offset: 2px;
+}
+
 @media (max-width: 480px) {
   .page {
     width: min(100% - 1rem, 70rem);
@@ -196,6 +572,14 @@ body {
 }
 
 @media (max-width: 640px) {
+  .searchControls {
+    flex-direction: column;
+  }
+
+  .categoryFilter {
+    width: 100%;
+  }
+
   .productGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
